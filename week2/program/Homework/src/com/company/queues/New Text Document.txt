@@ -1,0 +1,129 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED (0 errors, 3 warnings)
+API:          PASSED
+
+Spotbugs:     FAILED (6 warnings)
+PMD:          PASSED
+Checkstyle:   FAILED (1 error, 4 warnings)
+
+Correctness:  No tests available for autograding.
+Memory:       No tests available for autograding.
+Timing:       No tests available for autograding.
+
+Aggregate score: 10.00%
+[Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+5.2K Feb 11 05:13 Deque.java
+ 436 Feb 11 05:13 Permutation.java
+7.2K Feb 11 05:13 RandomizedQueue.java
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac11 Deque.java
+*-----------------------------------------------------------
+
+% javac11 RandomizedQueue.java
+*-----------------------------------------------------------
+RandomizedQueue.java:17: warning: [unchecked] unchecked cast
+        Item[] a = (Item[]) new Object[1];
+                            ^
+  required: Item[]
+  found:    Object[]
+  where Item is a type-variable:
+    Item extends Object declared in class RandomizedQueue
+RandomizedQueue.java:84: warning: [unchecked] unchecked cast
+        Item[] newArray = (Item[]) new Object[newCapacity];
+                                   ^
+  required: Item[]
+  found:    Object[]
+  where Item is a type-variable:
+    Item extends Object declared in class RandomizedQueue
+RandomizedQueue.java:107: warning: [unchecked] unchecked cast
+            Item[] a = (Item[]) new Object[lastIndex + 1];
+                                ^
+  required: Item[]
+  found:    Object[]
+  where Item is a type-variable:
+    Item extends Object declared in class RandomizedQueue
+3 warnings
+
+% javac11 Permutation.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+Deque:
+
+RandomizedQueue:
+
+Permutation:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% spotbugs *.class
+*-----------------------------------------------------------
+M C NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS NP: Passes a null value as an argument to the method 'enqueue()', which assumes that value is not null.  At RandomizedQueue.java:[line 214]
+M C SPP_USE_MATH_CONSTANT SPP: Method RandomizedQueue.main(String[]) uses non-standard math constant  At RandomizedQueue.java:[line 228]
+M D CBC_CONTAINS_BASED_CONDITIONAL CBC: This method RandomizedQueue.main(String[]) uses an excessively complex conditional that can be replaced with Set.contains  At RandomizedQueue.java:[line 180]
+M D CBC_CONTAINS_BASED_CONDITIONAL CBC: This method RandomizedQueue.main(String[]) uses an excessively complex conditional that can be replaced with Set.contains  At RandomizedQueue.java:[line 191]
+H B CNT_ROUGH_CONSTANT_VALUE CNT: The value '3.1415926' appears to be an approximate value for 'Math.PI'. Use the predefined library constant for code clarity and precision.  At RandomizedQueue.java:[line 228]
+M P SBSC_USE_STRINGBUFFER_CONCATENATION SBSC: Builds a 'String' object using the '+' operator in a loop, which can take time quadratic in the length of the resulting string. Instead, use 'StringBuilder'.  At RandomizedQueue.java:[line 147]
+Warnings generated: 6
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] Deque.java:6:1: Unnecessary import statement for 'java.lang.IllegalArgumentException' because it is from the package 'java.lang'. [RedundantImport]
+[WARN] Deque.java:6:8: Unused import statement for 'java.lang.IllegalArgumentException'. [UnusedImports]
+[WARN] Deque.java:11:17: The instance variable 'N' must start with a lowercase letter and use camelCase. [MemberName]
+[WARN] Deque.java:65:9: 'if' is not followed by whitespace. [WhitespaceAround]
+Checkstyle ends with 0 errors and 4 warnings.
+
+% custom checkstyle checks for Deque.java
+*-----------------------------------------------------------
+[ERROR] Deque.java:133:27: Do not print to standard output in 'next()'. [SideEffect]
+Checkstyle ends with 1 error and 0 warnings.
+
+% custom checkstyle checks for RandomizedQueue.java
+*-----------------------------------------------------------
+[INFO] RandomizedQueue.java:76: Using a loop in this method might be a performance bug. [Performance]
+
+% custom checkstyle checks for Permutation.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+ABORTING: you must fix any Checkstyle errors (not warnings).
